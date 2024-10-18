@@ -35,80 +35,202 @@
     <title>Boutique Ado {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
-    <header class="container-fluid fixed-top">
+    <header class="container-fluid fixed-top"></header>
         <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-                <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                    <h2 class="logo-font text-black my-0"><strong>Boutique</strong> Ado</h2>
+
+            <div class="col-12 col-lg-4 my-auto py-lg-0 text-center text-lg-left">
+                <a href="/" class="nav-link main-logo-link">
+                <h2 class="logo-font text-black my-0"><strong>Boutique</strong> Ado</h2>
                 </a>
             </div>
+
+            <!-- Search bar -->
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-                <form method="GET" action="">
+                <form method="GET" action="/products/">
                     <div class="input-group w-100">
                         <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
                         <div class="input-group-append">
                             <button class="form-control btn btn-black border border-black rounded-0" type="submit">
-                                <span class="icon">
-                                    <i class="fas fa-search"></i>
+                                <span class="icon"><i class="fas fa-search" aria-hidden="true"></i>
                                 </span>
                             </button>
                         </div>
                     </div>
                 </form>
             </div>
+
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+
+                    <!-- Account -->
                     <li class="list-inline-item dropdown">
-                        <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="text-black nav-link" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="text-center">
-                                <div><i class="fas fa-user fa-lg"></i></div>
+                                <div><i class="fas fa-user fa-lg" aria-hidden="true"></i></div>
                                 <p class="my-0">My Account</p>
                             </div>
                         </a>
                         <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                            {% if request.user.is_authenticated %}
-                                {% if request.user.is_superuser %}
-                                    <a href="" class="dropdown-item">Product Management</a>
-                                {% endif %}
-                                <a href="" class="dropdown-item">My Profile</a>
-                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                            {% else %}
-                                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                            {% endif %}
+                            
+                                    <a href="/accounts/signup/" class="dropdown-item">Register</a>
+                                    <a href="/accounts/login/" class="dropdown-item">Login</a>
+                            
                         </div>
                     </li>
+
+                    <!-- Bag -->
                     <li class="list-inline-item">
-                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="">
+                        <a href="/bag/" class="text-black nav-link">
                             <div class="text-center">
-                                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                                <div><i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i></div>
                                 <p class="my-0">
-                                    {% if grand_total %}
-                                        ${{ grand_total|floatformat:2 }}
-                                    {% else %}
-                                        $0.00
-                                    {% endif %}
+                                    
+                                        £0.00
+                                    
                                 </p>
                             </div>
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0"></div>
         </div>
         <div class="row bg-white">
             <nav class="navbar navbar-expand-lg navbar-light w-100">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                {% include 'includes/mobile-top-header.html' %}
-                {% include 'includes/main-nav.html' %}
+                <!-- Button to open the search bar -->
+<ul>
+  <li class="list-inline-item">
+      <a href="#" class="text-black nav-link d-block d-lg-none" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="text-center">
+              <div>
+                  <i class="fas fa-search fa-lg" aria-hidden="true"></i>
+              </div>
+              <p class="my-0">Search</p>
+          </div>
+      </a>
+
+      <!-- Search is in a dropdown menu -->
+      <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
+          <form action="/products/" method="GET" class="form">
+              <div class="input-group w-100">
+                  <input type="text" name="q" placeholder="Search our site" class="form-control border border-black rounded-0">
+                  <div class="input-group-append">
+                      <button class="form-control form-control btn btn-black border border-black rounded-0" type="submit">
+                          <span class="icon">
+                              <i class="fas-fa-search"></i>
+                          </span>
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </li>
+
+  <!-- Button to open the my account dropdown menu -->
+  <li class="list-inline-item dropdown">
+      <a href="#" id="user-options-mobile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="text-black nav-link d-block d-lg-none">
+          <div class="text-center">
+              <div>
+                  <i class="fas fa-user fa-lg" aria-hidden="true"></i>
+              </div>
+              <p class="my-0">My Account</p>
+          </div>
+      </a>
+      <div class="dropdown-menu border-0" aria-labelledby="user-options-mobile">
+          
+              <a href="/accounts/signup/" class="dropdown-item">Register</a>
+              <a href="/accounts/login/" class="dropdown-item">Login</a>
+          
+      </div>
+  </li>
+
+  <!-- Button to access the shopping bag -->
+  <li class="list-inline-item">
+      <a href="/bag/" class="text-black nav-link d-block d-lg-none">
+          <div class="tect-center">
+              <div>
+                  <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
+              </div>
+              <p class="my-0">
+                  
+                      $0.00
+                  
+              </p>
+          </div>
+      </a>
+  </li>
+</ul>
+                <div class="collapse navbar-collapse" id="main-nav">
+    <ul class="navbar-nav w-auto mx-auto">
+        <li class="nav-item d-block d-md-none">
+            <a href="/" class="logo-font font-weight-bold nav-link text-black mr-5" id="home-link">
+                Home
+            </a>
+        </li>
+        <!-- All products menu dropdown -->
+        <li class="nav-item dropdown">
+            <a href="#" class="logo-font font-weight-bold nav-link text-black mr-5" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                All Products
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
+                <a href="/products/?sort=price&amp;direction=asc" class="dropdown-item">By Price</a>
+                <a href="/products/?sort=rating&amp;direction=desc" class="dropdown-item">By Rating</a>
+                <a href="/products/?sort=category&amp;direction=asc" class="dropdown-item">By Category</a>
+                <a href="/products/" class="dropdown-item">All Products</a>
+            </div>
+        </li>
+
+        <!-- Clothing Menu -->
+        <li class="nav-item dropdown">
+            <a href="#" class="logo-font font-weight-bold nav-link text-black mr-5" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Clothing
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
+                <a href="/products/?category=activewear,essentials" class="dropdown-item">Activewear &amp; Essentials</a>
+                <a href="/products/?category=jeans" class="dropdown-item">Jeans</a>
+                <a href="/products/?category=shirts" class="dropdown-item">Shirts</a>
+                <a href="/products/?category=activewear,essentials,jeans,shirts" class="dropdown-item">All Clothing</a>
+            </div>
+        </li>
+
+        <!-- Homeware Menu -->
+        <li class="nav-item dropdown">
+            <a href="#" class="logo-font font-weight-bold nav-link text-black mr-5" id="homeware-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Homeware
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="homeware-link">
+                <a href="/products/?category=bed_bath" class="dropdown-item">Bed &amp; Bath</a>
+                <a href="/products/?category=kitchen_dining" class="dropdown-item">Kitchen &amp; Dining</a>
+                <a href="/products/?category=bed_bath,kitchen_dining" class="dropdown-item">All Homeware</a>
+            </div>
+        </li>
+
+
+        <!-- Special Offers Menu -->
+        <li class="nav-item dropdown">
+            <a href="#" class="logo-font font-weight-bold nav-link text-black" id="specials-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Special Offers
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="specials-link">
+                <a href="/products/?category=new_arrivals" class="dropdown-item">New Arrivals</a>
+                <a href="/products/?category=deals" class="dropdown-item">Deals</a>
+                <a href="/products/?category=clearance" class="dropdown-item">Clearance</a>
+                <a href="/products/?category=new_arrivals,deals,clearance" class="dropdown-item">All Specials</a>
+            </div>
+        </li>
+
+    </ul>
+</div>
             </nav>
         </div>
+
+        <!-- Delivery Banner -->
         <div id="delivery-banner" class="row text-center">
             <div class="col bg-black text-white">
-                <h4 class="logo-font my-1">Free delivery on orders over ${{ free_delivery_threshold }}!</h4>                
-            </div>            
+                <h4 class="logo-font my-1">Free delivery on orders over $50!</h4>
+            </div>
         </div>
     </header>
 
