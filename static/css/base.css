@@ -7,16 +7,8 @@ body {
     background-size: cover;
     height: calc(100vh - 164px);
     color: #555;
-    font-family: "Lato";
+    font-family: 'Lato';
 }
-
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* This will prevent horizontal overflow */
-}
-
-
 
 /* from Bulma */
 .icon {
@@ -68,7 +60,6 @@ html, body {
     background: #000 !important;
 }
 
-/* non homepage pages */
 .overlay {
 	height: 100%;
 	width: 100%;
@@ -79,37 +70,42 @@ html, body {
 	z-index: -1;
 }
 
+a.category-badge > span.badge:hover {
+    background: #212529 !important;
+    color: #fff !important;
+}
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
 @media (min-width: 1200px) {
-    .container {
-      max-width: 80%;
+  .container {
+    max-width: 80%;
+  }
+}
+
+/* fixed top navbar only on medium and up */
+@media (min-width: 992px) {
+    .fixed-top-desktop-only {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
     }
-  }
-  
-  /* fixed top navbar only on medium and up */
-  @media (min-width: 992px) {
-      .fixed-top-desktop-only {
-          position: fixed;
-          top: 0;
-          right: 0;
-          left: 0;
-          z-index: 1030;
-      }
-  
-      .header-container {
-          padding-top: 164px;
-      }
-  }
-  
-  /* pad the top a bit when navbar is collapsed on mobile */
-  @media (max-width: 991px) {
-      .header-container {
-          padding-top: 116px;
-      }
-  
-      body {
-          height: calc(100vh - 116px);
-      }
-  }
+
+    .header-container {
+        padding-top: 164px;
+    }
+}
+
+/* pad the top a bit when navbar is collapsed on mobile */
+@media (max-width: 991px) {
+    .header-container {
+        padding-top: 116px;
+    }
+
+    body {
+        height: calc(100vh - 116px);
+    }
+}
