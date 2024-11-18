@@ -101,6 +101,7 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
+        
 
         if request.user.is_authenticated:
             try:
